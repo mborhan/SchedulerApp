@@ -12,13 +12,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.test.schedulerapp.ui.utils.ViewModelFactory
+import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.model.AppData
 import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentAppListLayoutBinding
+import com.test.schedulerapp.db.AppDatabase
+import com.test.schedulerapp.db.data.model.AppListInfo
+import com.test.schedulerapp.ui.utils.ViewModelFactory
 import com.test.schedulerapp.workmanager.WorkController
 
 class AppListFragment : Fragment() {
+    private val TAG = "[AppListFragment]"
     private lateinit var binding: FragmentAppListLayoutBinding
     private var recyclerViewAdapter: AppItemViewAdapter? = null
     private lateinit var viewModel: AppListViewModel
@@ -79,6 +83,13 @@ class AppListFragment : Fragment() {
 
             clickedApp?.let {
                 WorkController.initWork(clickedApp.packageName, 15)
+                val appInfo = AppListInfo(
+                    packageName = clickedApp.packageName,
+                    appName = clickedApp.text,
+                    status = "None"
+                )
+                viewModel.deleteByPackageName(clickedApp.packageName)
+                viewModel.insert(appInfo)
             }
         }
 
@@ -91,9 +102,17 @@ class AppListFragment : Fragment() {
 
         // init ViewModel
         //context
-        val repository = AppListRepository(currentContext)
+        val dao = AppDatabase.getDatabase(SchedulerApp.getAppContext()).appListInfoDao()
+        val repository = AppListRepository(currentContext, dao)
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(AppListViewModel::class.java)
+
+        val appInfo = viewModel.allAppList
+        appInfo.observe(viewLifecycleOwner) { app ->
+            app.forEach {
+                Log.i(TAG, "app name - ${it.appName}")
+            }
+        }
 
         // observe LiveData
         viewModel.apps.observe(viewLifecycleOwner) { appList ->

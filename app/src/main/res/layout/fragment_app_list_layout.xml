@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_list_layout"
@@ -7,43 +8,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <!-- NestedScrollView with vertical content -->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <!-- Fixed Header Text -->
+    <TextView
+        android:id="@+id/app_list_top_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/app_list_top_header_text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@color/teal_200"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- RecyclerView scrolls independently -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/app_item_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/app_list_top_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <!-- LinearLayout to hold TextView + RecyclerView -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Title Text -->
-            <TextView
-                android:id="@+id/tvChooseApp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Choose an app for scheduling"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:background="@color/teal_200"
-                android:padding="16dp" />
-
-            <!-- RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/app_item_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
