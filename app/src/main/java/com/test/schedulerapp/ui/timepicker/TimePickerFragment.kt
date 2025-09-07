@@ -102,7 +102,7 @@ class TimePickerFragment : Fragment() {
         viewModel.appInfo?.let { app ->
             WorkController.initWork(app.packageName, currentTime)
             val appInfo = AppListInfo(
-                packageName = app.packageName, appName = app.text, status = "None"
+                packageName = app.packageName, appName = app.text, status = "Set"
             )
             Log.i(TAG, "app name: ${app.text}")
             viewModel.isPackageExists(app.packageName) {
