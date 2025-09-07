@@ -87,6 +87,9 @@ class AppListFragment : Fragment() {
         // observe LiveData
         viewModel.apps.observe(viewLifecycleOwner) { appList ->
             recyclerViewAdapter?.updateData(appList)
+            if(appList.isNotEmpty()){
+                binding.progressBar.visibility = View.GONE
+            }
         }
 
         viewModel.loadApps()
