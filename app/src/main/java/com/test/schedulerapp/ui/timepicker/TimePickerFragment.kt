@@ -92,6 +92,7 @@ class TimePickerFragment : Fragment() {
                 if (it) {
                     Log.i(TAG, "app info is already available in database.")
                     viewModel.deleteByPackageName(app.packageName)
+                    Toast.makeText(currentContext, "Cancel the schedule successfully!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -111,6 +112,7 @@ class TimePickerFragment : Fragment() {
                 } else {
                     Log.i(TAG, "app info added in db.")
                     viewModel.insert(appInfo)
+                    Toast.makeText(currentContext, "Save the schedule successfully!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
