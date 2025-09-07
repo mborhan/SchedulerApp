@@ -1,4 +1,4 @@
-package com.test.schedulerapp.ui.applist
+package com.test.schedulerapp.ui.utils
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,7 +11,7 @@ import com.test.schedulerapp.db.data.model.AppListInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AppListViewModel(private val repository: AppListRepository) : ViewModel() {
+class SharedViewModel(private val repository: AppListRepository) : ViewModel() {
 
     private val _apps = MutableLiveData<List<AppData>>()
     val apps: LiveData<List<AppData>> get() = _apps

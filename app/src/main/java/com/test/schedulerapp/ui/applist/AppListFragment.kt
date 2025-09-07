@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,17 +15,16 @@ import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentAppListLayoutBinding
 import com.test.schedulerapp.db.AppDatabase
-import com.test.schedulerapp.db.data.model.AppListInfo
 import com.test.schedulerapp.ui.timepicker.TimePickerFragment
+import com.test.schedulerapp.ui.utils.SharedViewModel
 import com.test.schedulerapp.ui.utils.ViewModelFactory
-import com.test.schedulerapp.workmanager.WorkController
 
 class AppListFragment : Fragment() {
     private val TAG = "[AppListFragment]"
 
     private lateinit var binding: FragmentAppListLayoutBinding
     private var recyclerViewAdapter: AppItemViewAdapter? = null
-    private lateinit var viewModel: AppListViewModel
+    private lateinit var viewModel: SharedViewModel
     private lateinit var currentContext: Context
 
     override fun onAttach(context: Context) {
@@ -52,7 +50,7 @@ class AppListFragment : Fragment() {
         val dao = AppDatabase.getDatabase(SchedulerApp.getAppContext()).appListInfoDao()
         val repository = AppListRepository(currentContext, dao)
         val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(AppListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), factory).get(SharedViewModel::class.java)
     }
 
     private fun handleItemClicked(position: Int) {
@@ -61,19 +59,6 @@ class AppListFragment : Fragment() {
         viewModel.appInfo = clickedApp
 
         clickedApp?.let {
-//            WorkController.initWork(clickedApp.packageName, 15)
-//            val appInfo = AppListInfo(
-//                packageName = clickedApp.packageName,
-//                appName = clickedApp.text,
-//                status = "None"
-//            )
-//            viewModel.isPackageExists(clickedApp.packageName) {
-//                if (it) {
-//                    Log.i(TAG, "app info is already added in database.")
-//                } else {
-//                    viewModel.insert(appInfo)
-//                }
-//            }
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TimePickerFragment())
                 .addToBackStack(null)

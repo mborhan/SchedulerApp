@@ -12,4 +12,6 @@
     <string name="select_time">Select Time</string>
     <string name="pick_time_is">Pick time is:</string>
     <string name="setup">Setup</string>
+    <string name="cancel_the_schedule_to_launch_the_app">Cancel the schedule to launch the app</string>
+    <string name="set_the_schedule_to_launch_the_app">Set the schedule to launch the app</string>
 </resources>
