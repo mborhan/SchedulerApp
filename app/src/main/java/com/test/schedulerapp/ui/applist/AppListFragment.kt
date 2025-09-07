@@ -88,8 +88,13 @@ class AppListFragment : Fragment() {
                     appName = clickedApp.text,
                     status = "None"
                 )
-                viewModel.deleteByPackageName(clickedApp.packageName)
-                viewModel.insert(appInfo)
+                viewModel.isPackageExists(clickedApp.packageName){
+                    if (it){
+                        Log.i(TAG, "app info is already added in database.")
+                    }else{
+                        viewModel.insert(appInfo)
+                    }
+                }
             }
         }
 
@@ -109,6 +114,7 @@ class AppListFragment : Fragment() {
 
         val appInfo = viewModel.allAppList
         appInfo.observe(viewLifecycleOwner) { app ->
+            Log.i(TAG, "observer is called.")
             app.forEach {
                 Log.i(TAG, "app name - ${it.appName}")
             }

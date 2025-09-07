@@ -17,6 +17,10 @@ class AppListRepository(private val context: Context, private val appListInfoDao
     //suspend fun delete(appListInfo: AppListInfo) = appListInfoDao.delete(appListInfo)
     suspend fun deleteByPackageName(pkgName: String) = appListInfoDao.deleteByPackageName(pkgName)
 
+    suspend fun updateStatus(pkgName: String, newStatus: String) = appListInfoDao.updateStatus(pkgName, newStatus)
+
+    suspend fun isPackageExists(pkgName: String): Boolean = appListInfoDao.isPackageExists(pkgName)
+
     fun getGetInstalledAppList(): List<AppData> {
         val pm: PackageManager = context.packageManager
 

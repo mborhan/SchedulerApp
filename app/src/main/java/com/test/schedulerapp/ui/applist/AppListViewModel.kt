@@ -26,6 +26,17 @@ class AppListViewModel(private val repository: AppListRepository) : ViewModel() 
         repository.deleteByPackageName(pkgName)
     }
 
+    fun updateStatus(pkgName: String, newStatus: String) = viewModelScope.launch {
+        repository.updateStatus(pkgName, newStatus)
+    }
+
+    fun isPackageExists(pkgName: String, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val isExist = repository.isPackageExists(pkgName)
+            onResult(isExist)
+        }
+    }
+
     fun loadApps() {
         viewModelScope.launch(Dispatchers.IO) {
             val appList = repository.getGetInstalledAppList()
