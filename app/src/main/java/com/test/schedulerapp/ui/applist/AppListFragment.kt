@@ -11,11 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.test.schedulerapp.R
 import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentAppListLayoutBinding
 import com.test.schedulerapp.db.AppDatabase
 import com.test.schedulerapp.db.data.model.AppListInfo
+import com.test.schedulerapp.ui.timepicker.TimePickerFragment
 import com.test.schedulerapp.ui.utils.ViewModelFactory
 import com.test.schedulerapp.workmanager.WorkController
 
@@ -54,22 +56,26 @@ class AppListFragment : Fragment() {
     }
 
     private fun handleItemClicked(position: Int) {
-        Toast.makeText(context, "positin - $position", Toast.LENGTH_LONG).show()
+       // Toast.makeText(context, "positin - $position", Toast.LENGTH_LONG).show()
         val clickedApp = viewModel.apps.value?.get(position)
         clickedApp?.let {
-            WorkController.initWork(clickedApp.packageName, 15)
-            val appInfo = AppListInfo(
-                packageName = clickedApp.packageName,
-                appName = clickedApp.text,
-                status = "None"
-            )
-            viewModel.isPackageExists(clickedApp.packageName) {
-                if (it) {
-                    Log.i(TAG, "app info is already added in database.")
-                } else {
-                    viewModel.insert(appInfo)
-                }
-            }
+//            WorkController.initWork(clickedApp.packageName, 15)
+//            val appInfo = AppListInfo(
+//                packageName = clickedApp.packageName,
+//                appName = clickedApp.text,
+//                status = "None"
+//            )
+//            viewModel.isPackageExists(clickedApp.packageName) {
+//                if (it) {
+//                    Log.i(TAG, "app info is already added in database.")
+//                } else {
+//                    viewModel.insert(appInfo)
+//                }
+//            }
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, TimePickerFragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 

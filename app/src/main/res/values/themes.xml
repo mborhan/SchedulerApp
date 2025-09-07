@@ -23,4 +23,9 @@
         <item name="android:windowFullscreen">false</item>
     </style>
 
+    <style name="CustomTimePickerTheme" parent="Theme.MaterialComponents.DayNight">
+        <!-- Text color for spinner (hour, minute, AM/PM) -->
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
 </resources>
