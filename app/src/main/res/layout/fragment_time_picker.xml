@@ -15,9 +15,18 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/ic_launcher_background"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_foreground" /> <!-- Use drawable for circular shape -->
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="AppName"
+        android:textColor="@color/black"
+        android:textSize="27sp"
+        android:textStyle="bold" />
 
     <!-- Title above TimePicker -->
     <TextView
@@ -25,9 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textColor="@color/black"
         android:gravity="start"
         android:text="@string/select_time"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -50,7 +59,7 @@
         android:layout_marginTop="16dp"
         android:gravity="start"
         android:paddingTop="10dp"
-        android:text="@string/pick_time_is"
+        android:text="@string/time_is"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />

@@ -52,12 +52,14 @@ class AppListFragment : Fragment() {
         val dao = AppDatabase.getDatabase(SchedulerApp.getAppContext()).appListInfoDao()
         val repository = AppListRepository(currentContext, dao)
         val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(AppListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), factory).get(AppListViewModel::class.java)
     }
 
     private fun handleItemClicked(position: Int) {
        // Toast.makeText(context, "positin - $position", Toast.LENGTH_LONG).show()
         val clickedApp = viewModel.apps.value?.get(position)
+        viewModel.appInfo = clickedApp
+
         clickedApp?.let {
 //            WorkController.initWork(clickedApp.packageName, 15)
 //            val appInfo = AppListInfo(

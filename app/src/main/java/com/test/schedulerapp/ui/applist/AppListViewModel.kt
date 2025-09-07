@@ -15,6 +15,7 @@ class AppListViewModel(private val repository: AppListRepository) : ViewModel() 
 
     private val _apps = MutableLiveData<List<AppData>>()
     val apps: LiveData<List<AppData>> get() = _apps
+    var appInfo: AppData? = null
 
     val allAppList = repository.allAppList
 
