@@ -15,6 +15,7 @@ import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentTimePickerBinding
 import com.test.schedulerapp.db.AppDatabase
 import com.test.schedulerapp.db.data.model.AppListInfo
+import com.test.schedulerapp.ui.changeschedule.ChangeScheduleFragment
 import com.test.schedulerapp.ui.utils.SharedViewModel
 import com.test.schedulerapp.ui.utils.ViewModelFactory
 import com.test.schedulerapp.workmanager.WorkController
@@ -84,18 +85,22 @@ class TimePickerFragment : Fragment() {
 
     private fun handleCancelSchedule() {
         Log.i(TAG, "handleCancelSchedule")
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, ChangeScheduleFragment())
+            .addToBackStack(null)
+            .commit()
 
-        viewModel.appInfo?.let { app ->
-            WorkController.cancelWork(app.packageName)
-            Log.i(TAG, "app name: ${app.text}")
-            viewModel.isPackageExists(app.packageName) {
-                if (it) {
-                    Log.i(TAG, "app info is already available in database.")
-                    viewModel.deleteByPackageName(app.packageName)
-                    Toast.makeText(currentContext, "Cancel the schedule successfully!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+//        viewModel.appInfo?.let { app ->
+//            WorkController.cancelWork(app.packageName)
+//            Log.i(TAG, "app name: ${app.text}")
+//            viewModel.isPackageExists(app.packageName) {
+//                if (it) {
+//                    Log.i(TAG, "app info is already available in database.")
+//                    viewModel.deleteByPackageName(app.packageName)
+//                    Toast.makeText(currentContext, "Cancel the schedule successfully!", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
     }
 
     private fun handleSetupSchedule() {
