@@ -1,18 +1,25 @@
 package com.test.schedulerapp.ui.main
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.test.schedulerapp.R
 import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentHomeBinding
 import com.test.schedulerapp.db.AppDatabase
+import com.test.schedulerapp.notification.NotificationMgr
 import com.test.schedulerapp.ui.applist.AppListFragment
 
 class HomeFragment : Fragment() {
@@ -36,6 +43,24 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initVar()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    101
+                )
+            }
+        }
+//Test notification
+//        val ins = NotificationMgr(requireContext())
+//        ins.createNotificationChannel()
+//        ins.showNotification("App launching notification")
     }
 
     private fun initVar() {
