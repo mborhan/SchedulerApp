@@ -12,7 +12,7 @@ import com.test.schedulerapp.data.model.TimeSwitchItem
 
 class TimeSwitchAdapter(
     private var items: List<TimeSwitchItem>,
-    private val onSwitchChanged: (TimeSwitchItem, Boolean) -> Unit
+    private val onSwitchChanged: (TimeSwitchItem, Boolean, Int) -> Unit
 ) : RecyclerView.Adapter<TimeSwitchAdapter.TimeSwitchViewHolder>() {
 
     fun updateData(newList: List<TimeSwitchItem>) {
@@ -39,7 +39,7 @@ class TimeSwitchAdapter(
         // Handle switch toggle
         holder.switchButton.setOnCheckedChangeListener { _, isChecked ->
             item.isEnabled = isChecked
-            onSwitchChanged(item, isChecked)
+            onSwitchChanged(item, isChecked, position)
         }
     }
 

@@ -49,11 +49,13 @@ class ChangeScheduleFragment : Fragment() {
         viewModel.allAppList.observe(viewLifecycleOwner) {
             val timeList: MutableList<TimeSwitchItem> = mutableListOf()
 
+            viewModel.latestApplist = mutableListOf()
             it.forEach {
                 Log.i(TAG, "packagename - ${it.packageName}, workerTag - ${it.workerTag}")
                 Log.i(TAG, "hourOfDay: ${it.hourOfDay}, minute: ${it.minute}")
                 val item = TimeSwitchItem("${it.hourOfDay}" + ":" + "${it.minute}", true)
                 timeList.add(item)
+                viewModel.latestApplist.add(it)
             }
 
             timeSwitchItemAdapter?.updateData(timeList)
@@ -70,10 +72,14 @@ class ChangeScheduleFragment : Fragment() {
     private fun setRecyclerview() {
 
         binding.itemRecyclerview.layoutManager = LinearLayoutManager(context)
-        timeSwitchItemAdapter = TimeSwitchAdapter(emptyList()) { item, isChecked ->
+        timeSwitchItemAdapter = TimeSwitchAdapter(emptyList()) { item, isChecked, position ->
             if (!isChecked) {
-                viewModel.appInfo?.let {
-                    viewModel.deleteByPackageName(it.packageName)
+                try {
+                    val workerTagName = viewModel.latestApplist.get(position).workerTag
+                    Log.i(TAG, "workerTagName - $workerTagName")
+                    //viewModel.deleteByPackageName(workerTagName) //TODO:: Need to update DAO
+                } catch (e: Exception) {
+                    Log.i(TAG, "error - $e")
                 }
             }
         }

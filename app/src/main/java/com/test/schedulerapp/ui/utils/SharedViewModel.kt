@@ -18,6 +18,7 @@ class SharedViewModel(private val repository: AppListRepository) : ViewModel() {
     var appInfo: AppData? = null
 
     val allAppList = repository.allAppList
+    var latestApplist: MutableList<AppListInfo> = mutableListOf()
 
     fun insert(appInfo: AppListInfo) = viewModelScope.launch {
         repository.insert(appInfo)
