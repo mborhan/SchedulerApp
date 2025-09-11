@@ -7,12 +7,18 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.test.schedulerapp.R
+import com.test.schedulerapp.data.model.AppData
 import com.test.schedulerapp.data.model.TimeSwitchItem
 
 class TimeSwitchAdapter(
-    private val items: MutableList<TimeSwitchItem>,
+    private var items: List<TimeSwitchItem>,
     private val onSwitchChanged: (TimeSwitchItem, Boolean) -> Unit
 ) : RecyclerView.Adapter<TimeSwitchAdapter.TimeSwitchViewHolder>() {
+
+    fun updateData(newList: List<TimeSwitchItem>) {
+        items = newList
+        notifyDataSetChanged()
+    }
 
     inner class TimeSwitchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTime: TextView = itemView.findViewById(R.id.tvTime)

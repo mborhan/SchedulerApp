@@ -9,5 +9,7 @@ data class AppListInfo(
     val packageName: String,
     val appName: String,
     val status: String,
-    val workerTag: String
+    val workerTag: String,
+    val hourOfDay: Int,
+    val minute: Int
 )

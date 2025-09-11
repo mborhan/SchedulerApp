@@ -31,6 +31,8 @@ class TimePickerFragment : Fragment() {
     private lateinit var viewModel: SharedViewModel
     private lateinit var currentContext: Context
     private var nextScheduleTime: Long = 0
+    private var hourOfDay: Int = 0
+    private var minute: Int = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,6 +63,8 @@ class TimePickerFragment : Fragment() {
 
         binding.timePicker.setOnTimeChangedListener { view, hourOfDay, minute ->
             val time = "$hourOfDay" + " : " + "$minute"
+            this.hourOfDay = hourOfDay
+            this.minute = minute
 
             val msg = getString(R.string.time_is) + " " + time
             binding.timeText.text = msg
@@ -109,7 +113,9 @@ class TimePickerFragment : Fragment() {
                 packageName = app.packageName,
                 appName = app.text,
                 status = ScheduleState.SET.name,
-                workerTag = workerTagName
+                workerTag = workerTagName,
+                hourOfDay = hourOfDay,
+                minute = minute
             )
 
             Log.i(TAG, "app name: ${app.text}")

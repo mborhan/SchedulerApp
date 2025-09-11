@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.test.schedulerapp.db.dao.AppListInfoDao
 import com.test.schedulerapp.db.data.model.AppListInfo
 
-@Database(entities = [AppListInfo::class], version = 2, exportSchema = false)
+@Database(entities = [AppListInfo::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appListInfoDao(): AppListInfoDao
 

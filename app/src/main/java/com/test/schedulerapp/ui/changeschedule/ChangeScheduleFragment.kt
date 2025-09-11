@@ -21,6 +21,7 @@ class ChangeScheduleFragment : Fragment() {
     private lateinit var binding: FragmentChangeScheduleBinding
     private lateinit var currentContext: Context
     private lateinit var viewModel: SharedViewModel
+    private var timeSwitchItemAdapter: TimeSwitchAdapter? = null
     private var TAG = "[ChangeScheduleFragment]"
 
     override fun onAttach(context: Context) {
@@ -46,9 +47,16 @@ class ChangeScheduleFragment : Fragment() {
         }
 
         viewModel.allAppList.observe(viewLifecycleOwner) {
+            val timeList: MutableList<TimeSwitchItem> = mutableListOf()
+
             it.forEach {
                 Log.i(TAG, "packagename - ${it.packageName}, workerTag - ${it.workerTag}")
+                Log.i(TAG, "hourOfDay: ${it.hourOfDay}, minute: ${it.minute}")
+                val item = TimeSwitchItem("${it.hourOfDay}" + ":" + "${it.minute}", true)
+                timeList.add(item)
             }
+
+            timeSwitchItemAdapter?.updateData(timeList)
         }
     }
 
@@ -61,14 +69,8 @@ class ChangeScheduleFragment : Fragment() {
 
     private fun setRecyclerview() {
 
-        val timeList = mutableListOf(
-            TimeSwitchItem("08:00 AM", true),
-            TimeSwitchItem("12:30 PM", true),
-            TimeSwitchItem("06:45 PM", true)
-        )
-
         binding.itemRecyclerview.layoutManager = LinearLayoutManager(context)
-        val adapter = TimeSwitchAdapter(timeList) { item, isChecked ->
+        timeSwitchItemAdapter = TimeSwitchAdapter(emptyList()) { item, isChecked ->
             if (!isChecked) {
                 viewModel.appInfo?.let {
                     viewModel.deleteByPackageName(it.packageName)
@@ -76,6 +78,6 @@ class ChangeScheduleFragment : Fragment() {
             }
         }
 
-        binding.itemRecyclerview.adapter = adapter
+        binding.itemRecyclerview.adapter = timeSwitchItemAdapter
     }
 }
