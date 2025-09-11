@@ -47,7 +47,7 @@ class ChangeScheduleFragment : Fragment() {
 
         viewModel.allAppList.observe(viewLifecycleOwner) {
             it.forEach {
-                Log.i(TAG, "packagename - ${it.packageName}")
+                Log.i(TAG, "packagename - ${it.packageName}, workerTag - ${it.workerTag}")
             }
         }
     }

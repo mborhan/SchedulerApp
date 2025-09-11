@@ -7,12 +7,13 @@ import androidx.room.RoomDatabase
 import com.test.schedulerapp.db.dao.AppListInfoDao
 import com.test.schedulerapp.db.data.model.AppListInfo
 
-@Database(entities = [AppListInfo::class], version = 1, exportSchema = false)
+@Database(entities = [AppListInfo::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appListInfoDao(): AppListInfoDao
 
     companion object {
-        @Volatile private var INSTANCE: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
@@ -20,7 +21,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

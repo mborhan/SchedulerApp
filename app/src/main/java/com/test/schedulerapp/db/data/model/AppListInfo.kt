@@ -8,5 +8,6 @@ data class AppListInfo(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val packageName: String,
     val appName: String,
-    val status: String
+    val status: String,
+    val workerTag: String
 )
