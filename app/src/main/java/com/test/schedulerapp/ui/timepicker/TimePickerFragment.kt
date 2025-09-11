@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.test.schedulerapp.R
@@ -16,6 +17,8 @@ import com.test.schedulerapp.databinding.FragmentTimePickerBinding
 import com.test.schedulerapp.db.AppDatabase
 import com.test.schedulerapp.db.data.model.AppListInfo
 import com.test.schedulerapp.ui.changeschedule.ChangeScheduleFragment
+import com.test.schedulerapp.ui.main.HomeFragment
+import com.test.schedulerapp.ui.utils.Navigator
 import com.test.schedulerapp.ui.utils.SharedViewModel
 import com.test.schedulerapp.ui.utils.ViewModelFactory
 import com.test.schedulerapp.workmanager.WorkController
@@ -85,10 +88,11 @@ class TimePickerFragment : Fragment() {
 
     private fun handleCancelSchedule() {
         Log.i(TAG, "handleCancelSchedule")
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, ChangeScheduleFragment())
-            .addToBackStack(null)
-            .commit()
+        Navigator.startSecondLVL(
+            requireActivity() as AppCompatActivity,
+            ChangeScheduleFragment(),
+            true
+        )
 
 //        viewModel.appInfo?.let { app ->
 //            WorkController.cancelWork(app.packageName)

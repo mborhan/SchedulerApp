@@ -15,7 +15,9 @@ import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentAppListLayoutBinding
 import com.test.schedulerapp.db.AppDatabase
+import com.test.schedulerapp.ui.main.HomeFragment
 import com.test.schedulerapp.ui.timepicker.TimePickerFragment
+import com.test.schedulerapp.ui.utils.Navigator
 import com.test.schedulerapp.ui.utils.SharedViewModel
 import com.test.schedulerapp.ui.utils.ViewModelFactory
 
@@ -59,10 +61,11 @@ class AppListFragment : Fragment() {
         viewModel.appInfo = clickedApp
 
         clickedApp?.let {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, TimePickerFragment())
-                .addToBackStack(null)
-                .commit()
+            Navigator.startSecondLVL(
+                requireActivity() as AppCompatActivity,
+                TimePickerFragment(),
+                true
+            )
         }
     }
 

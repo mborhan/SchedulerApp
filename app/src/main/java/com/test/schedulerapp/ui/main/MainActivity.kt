@@ -5,6 +5,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.test.schedulerapp.R
+import com.test.schedulerapp.ui.utils.Navigator
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,9 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         // Load HomeFragment on start
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, HomeFragment())
-                .commit()
+            Navigator.startSecondLVL(this, HomeFragment(), false)
         }
 
         // Show/hide back arrow automatically based on back stack

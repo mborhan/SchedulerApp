@@ -21,6 +21,7 @@ import com.test.schedulerapp.databinding.FragmentHomeBinding
 import com.test.schedulerapp.db.AppDatabase
 import com.test.schedulerapp.notification.NotificationMgr
 import com.test.schedulerapp.ui.applist.AppListFragment
+import com.test.schedulerapp.ui.utils.Navigator
 
 class HomeFragment : Fragment() {
     private val TAG = "[HomeFragment]"
@@ -65,10 +66,11 @@ class HomeFragment : Fragment() {
 
     private fun initVar() {
         binding.showInstallApp.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, AppListFragment())
-                .addToBackStack(null)
-                .commit()
+            Navigator.startSecondLVL(
+                requireActivity() as AppCompatActivity,
+                AppListFragment(),
+                true
+            )
         }
 
         binding.showLaunchFailAppList.setOnClickListener {
