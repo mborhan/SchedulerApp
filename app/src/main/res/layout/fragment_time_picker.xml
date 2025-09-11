@@ -1,109 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="24dp"
     tools:context=".ui.main.MainActivity">
 
-    <!-- Top Circular Image -->
-    <ImageView
-        android:id="@+id/topImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop" />
-
-    <TextView
-        android:id="@+id/appName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="AppName"
-        android:textColor="@color/black"
-        android:textSize="27sp"
-        android:textStyle="bold" />
-
-    <!-- Title above TimePicker -->
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="start"
-        android:text="@string/select_time"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <!-- TimePicker -->
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@color/gray_200"
-        android:padding="16dp"
-        android:theme="@style/CustomTimePickerTheme"
-        android:timePickerMode="spinner" />
-
-    <TextView
-        android:id="@+id/timeText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="start"
-        android:paddingTop="10dp"
-        android:text="@string/time_is"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <!-- Spacer to push buttons to bottom -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <!-- Bottom Buttons -->
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        android:weightSum="2">
+        android:padding="24dp">
+
+        <!-- Top Circular Image -->
+        <ImageView
+            android:id="@+id/topImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/setupButton"
+            android:id="@+id/appName"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="@color/blue"
-            android:clickable="true"
-            android:focusable="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="@string/set_the_schedule_to_launch_the_app"
+            android:text="AppName"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="27sp"
             android:textStyle="bold" />
+
+        <!-- Title above TimePicker -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="start"
+            android:text="@string/select_time"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- TimePicker -->
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray_200"
+            android:padding="16dp"
+            android:theme="@style/CustomTimePickerTheme"
+            android:timePickerMode="spinner" />
 
         <TextView
-            android:id="@+id/cancelButton"
+            android:id="@+id/timeText"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginTop="12dp"
-            android:background="@color/red"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/cancel_the_schedule_to_launch_the_app"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:paddingTop="10dp"
+            android:text="@string/time_is"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
+        <!-- Spacer to push buttons to bottom -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Bottom Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/setupButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@color/blue"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/set_the_schedule_to_launch_the_app"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cancelButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/red"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/cancel_the_schedule_to_launch_the_app"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
