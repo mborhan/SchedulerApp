@@ -16,6 +16,7 @@ import com.test.schedulerapp.databinding.FragmentChangeScheduleBinding
 import com.test.schedulerapp.db.AppDatabase
 import com.test.schedulerapp.ui.utils.SharedViewModel
 import com.test.schedulerapp.ui.utils.ViewModelFactory
+import com.test.schedulerapp.workmanager.WorkController
 
 class ChangeScheduleFragment : Fragment() {
     private lateinit var binding: FragmentChangeScheduleBinding
@@ -77,7 +78,9 @@ class ChangeScheduleFragment : Fragment() {
                 try {
                     val workerTagName = viewModel.latestApplist.get(position).workerTag
                     Log.i(TAG, "workerTagName - $workerTagName")
-                    //viewModel.deleteByPackageName(workerTagName) //TODO:: Need to update DAO
+
+                    viewModel.deleteByWorkerTagName(workerTagName)
+                    WorkController.cancelWork(workerTagName)
                 } catch (e: Exception) {
                     Log.i(TAG, "error - $e")
                 }

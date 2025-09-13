@@ -21,4 +21,7 @@ interface AppListInfoDao {
     @Query("SELECT EXISTS(SELECT 1 FROM app_list_info WHERE packageName = :pkgName LIMIT 1)")
     suspend fun isPackageExists(pkgName: String): Boolean
 
+    @Query("DELETE FROM app_list_info WHERE workerTag = :workerTagName")
+    suspend fun deleteByWorkerTagName(workerTagName: String)
+
 }

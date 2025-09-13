@@ -24,6 +24,10 @@ class SharedViewModel(private val repository: AppListRepository) : ViewModel() {
         repository.insert(appInfo)
     }
 
+    fun deleteByWorkerTagName(workerTagName: String) = viewModelScope.launch {
+        repository.deleteByWorkerTagName(workerTagName)
+    }
+
     fun deleteByPackageName(pkgName: String) = viewModelScope.launch {
         repository.deleteByPackageName(pkgName)
     }
