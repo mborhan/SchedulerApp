@@ -9,17 +9,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.test.schedulerapp.R
 import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentHomeBinding
 import com.test.schedulerapp.db.AppDatabase
-import com.test.schedulerapp.notification.NotificationMgr
 import com.test.schedulerapp.ui.applist.AppListFragment
 import com.test.schedulerapp.ui.utils.Navigator
 
@@ -58,10 +55,6 @@ class HomeFragment : Fragment() {
                 )
             }
         }
-//Test notification
-//        val ins = NotificationMgr(requireContext())
-//        ins.createNotificationChannel()
-//        ins.showNotification("App launching notification")
     }
 
     private fun initVar() {

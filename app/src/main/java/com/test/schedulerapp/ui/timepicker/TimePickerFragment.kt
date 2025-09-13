@@ -107,7 +107,7 @@ class TimePickerFragment : Fragment() {
         Log.i(TAG, "handleSetupButtonClicked: current time - $nextScheduleTime")
         viewModel.appInfo?.let { app ->
             val workerTagName = app.packageName + "${TimeCalculation.getCurrentTimeStamp()}"
-            WorkController.initWork(workerTagName, nextScheduleTime)
+            WorkController.initWork(workerTagName, nextScheduleTime, app.packageName)
 
             val appInfo = AppListInfo(
                 packageName = app.packageName,
