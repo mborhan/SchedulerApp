@@ -21,18 +21,13 @@ object WorkController {
 
         //create work
         val inputData = workDataOf(
-            GlobalConstant.WORK_TYPE_WORK_TAG_NAME to workTag,
-            GlobalConstant.PACKAGE_NAME to pkg
+            GlobalConstant.WORK_TYPE_WORK_TAG_NAME to workTag, GlobalConstant.PACKAGE_NAME to pkg
         )
 
-        val workRequest = OneTimeWorkRequestBuilder<BackgroundWorker>()
-            .setInputData(inputData)
-            .setInitialDelay(
-                2,
-                TimeUnit.MINUTES
-            ) //TODO:: Need to replace time by time interval.
-            .addTag(workTag)
-            .build()
+        val workRequest =
+            OneTimeWorkRequestBuilder<BackgroundWorker>().setInputData(inputData).setInitialDelay(
+                timeInterval, TimeUnit.MINUTES
+            ).addTag(workTag).build()
 
         workManager.enqueue(workRequest)
     }

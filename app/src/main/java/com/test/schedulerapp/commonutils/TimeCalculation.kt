@@ -9,7 +9,6 @@ object TimeCalculation {
         val now = LocalDateTime.now()
         val todayTarget = now.toLocalDate().atTime(targetHour, targetMinute)
 
-        // jodi target time already chole jae, next day nite hobe
         val finalTarget = if (todayTarget.isBefore(now)) {
             todayTarget.plusDays(1)
         } else {

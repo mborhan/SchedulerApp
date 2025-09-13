@@ -128,4 +128,9 @@ class TimePickerFragment : Fragment() {
             ).show()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Time picker"
+    }
 }

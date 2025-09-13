@@ -10,12 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.test.schedulerapp.R
 import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.repository.AppListRepository
 import com.test.schedulerapp.databinding.FragmentAppListLayoutBinding
 import com.test.schedulerapp.db.AppDatabase
-import com.test.schedulerapp.ui.main.HomeFragment
 import com.test.schedulerapp.ui.timepicker.TimePickerFragment
 import com.test.schedulerapp.ui.utils.Navigator
 import com.test.schedulerapp.ui.utils.SharedViewModel
@@ -56,7 +54,7 @@ class AppListFragment : Fragment() {
     }
 
     private fun handleItemClicked(position: Int) {
-       // Toast.makeText(context, "positin - $position", Toast.LENGTH_LONG).show()
+        // Toast.makeText(context, "positin - $position", Toast.LENGTH_LONG).show()
         val clickedApp = viewModel.apps.value?.get(position)
         viewModel.appInfo = clickedApp
 
@@ -83,7 +81,7 @@ class AppListFragment : Fragment() {
         // observe LiveData
         viewModel.apps.observe(viewLifecycleOwner) { appList ->
             recyclerViewAdapter?.updateData(appList)
-            if(appList.isNotEmpty()){
+            if (appList.isNotEmpty()) {
                 binding.progressBar.visibility = View.GONE
             }
         }
@@ -93,6 +91,6 @@ class AppListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = "AppListView"
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Installed apps"
     }
 }

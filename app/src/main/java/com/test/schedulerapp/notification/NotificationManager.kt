@@ -14,19 +14,14 @@ import com.test.schedulerapp.commonutils.GlobalConstant
 
 object NotificationMgr {
 
-    private const val CHANNEL_ID = "my_channel_id"
-    private const val CHANNEL_NAME = "My Notifications"
-    private const val CHANNEL_DESC = "Channel for demo notifications"
-    private const val NOTIFICATION_ID = 1001
-
     fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
+                GlobalConstant.CHANNEL_ID,
+                GlobalConstant.CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = CHANNEL_DESC
+                description = GlobalConstant.CHANNEL_DESC
             }
 
             val manager =
@@ -48,16 +43,17 @@ object NotificationMgr {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(context, GlobalConstant.CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("Scheduler app demo")
             .setContentText(message)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+            .setOngoing(false)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         with(NotificationManagerCompat.from(context)) {
-            notify(NOTIFICATION_ID, builder.build())
+            notify(GlobalConstant.NOTIFICATION_ID, builder.build())
         }
     }
 }

@@ -14,14 +14,15 @@ class AppListRepository(private val context: Context, private val appListInfoDao
 
     suspend fun insert(appInfo: AppListInfo) = appListInfoDao.insert(appInfo)
 
-    //suspend fun delete(appListInfo: AppListInfo) = appListInfoDao.delete(appListInfo)
     suspend fun deleteByPackageName(pkgName: String) = appListInfoDao.deleteByPackageName(pkgName)
 
-    suspend fun updateStatus(pkgName: String, newStatus: String) = appListInfoDao.updateStatus(pkgName, newStatus)
+    suspend fun updateStatus(pkgName: String, newStatus: String) =
+        appListInfoDao.updateStatus(pkgName, newStatus)
 
     suspend fun isPackageExists(pkgName: String): Boolean = appListInfoDao.isPackageExists(pkgName)
 
-    suspend fun deleteByWorkerTagName(workerTagName: String) = appListInfoDao.deleteByWorkerTagName(workerTagName)
+    suspend fun deleteByWorkerTagName(workerTagName: String) =
+        appListInfoDao.deleteByWorkerTagName(workerTagName)
 
     fun getGetInstalledAppList(): List<AppData> {
         val pm: PackageManager = context.packageManager

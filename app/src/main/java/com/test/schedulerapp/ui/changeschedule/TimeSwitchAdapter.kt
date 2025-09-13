@@ -7,7 +7,6 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.test.schedulerapp.R
-import com.test.schedulerapp.data.model.AppData
 import com.test.schedulerapp.data.model.TimeSwitchItem
 
 class TimeSwitchAdapter(
