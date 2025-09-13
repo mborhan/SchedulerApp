@@ -1,7 +1,6 @@
 package com.test.schedulerapp.workmanager
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.work.Worker
@@ -25,11 +24,11 @@ class BackgroundWorker(appContext: Context, workerParams: WorkerParameters) :
         val pm: PackageManager = context.packageManager
         val launcherIntent = pm.getLaunchIntentForPackage(pkg)
         Log.i(TAG, "launcherIntent - $launcherIntent")
-
+        showNotificationForLaunchingIntent(pkg)
         try {
-            launcherIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(launcherIntent)
-            Log.i(TAG, "Launching success!")
+//            launcherIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            context.startActivity(launcherIntent)
+//            Log.i(TAG, "Launching success!")
             return Result.success()
         } catch (e: Exception) {
             Log.i(TAG, "error - $e")
@@ -42,7 +41,7 @@ class BackgroundWorker(appContext: Context, workerParams: WorkerParameters) :
         val context = SchedulerApp.getAppContext()
         val message = getAppNameFromPackage(context, pkg)
         NotificationMgr.createNotificationChannel(context)
-        NotificationMgr.showNotification(context, "$message, launching error!")
+        NotificationMgr.showNotification(context, "$message, launching error!", pkg)
     }
 
     private fun getAppNameFromPackage(context: Context, packageName: String): String? {

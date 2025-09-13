@@ -28,7 +28,7 @@ object WorkController {
         val workRequest = OneTimeWorkRequestBuilder<BackgroundWorker>()
             .setInputData(inputData)
             .setInitialDelay(
-                timeInterval,
+                2,
                 TimeUnit.MINUTES
             ) //TODO:: Need to replace time by time interval.
             .addTag(workTag)
