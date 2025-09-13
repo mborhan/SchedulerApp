@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.test.schedulerapp.R
 import com.test.schedulerapp.SchedulerApp
 import com.test.schedulerapp.data.model.TimeSwitchItem
 import com.test.schedulerapp.data.repository.AppListRepository
@@ -55,12 +56,24 @@ class ChangeScheduleFragment : Fragment() {
             it.forEach {
                 Log.i(TAG, "packagename - ${it.packageName}, workerTag - ${it.workerTag}")
                 Log.i(TAG, "hourOfDay: ${it.hourOfDay}, minute: ${it.minute}")
-                val item = TimeSwitchItem("${it.hourOfDay}" + ":" + "${it.minute}", true)
-                timeList.add(item)
-                viewModel.latestApplist.add(it)
+
+                if (it.packageName.equals(viewModel.appInfo?.packageName)) {
+                    val item = TimeSwitchItem("${it.hourOfDay}" + ":" + "${it.minute}", true)
+                    timeList.add(item)
+                    viewModel.latestApplist.add(it)
+                }
             }
 
             timeSwitchItemAdapter?.updateData(timeList)
+            updateTitleText()
+        }
+    }
+
+    private fun updateTitleText(){
+        if(viewModel.latestApplist.size > 0){
+            binding.titleText.text = currentContext.getString(R.string.update_to_app_lunch_schedule)
+        }else{
+            binding.titleText.text = "There is no schedule available for cancelling."
         }
     }
 
