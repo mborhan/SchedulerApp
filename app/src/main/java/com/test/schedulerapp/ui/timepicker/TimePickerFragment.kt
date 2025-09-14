@@ -19,6 +19,7 @@ import com.test.schedulerapp.databinding.FragmentTimePickerBinding
 import com.test.schedulerapp.db.AppDatabase
 import com.test.schedulerapp.db.data.model.AppListInfo
 import com.test.schedulerapp.ui.changeschedule.ChangeScheduleFragment
+import com.test.schedulerapp.ui.updateschedule.UpdateScheduleFragment
 import com.test.schedulerapp.ui.utils.Navigator
 import com.test.schedulerapp.ui.utils.SharedViewModel
 import com.test.schedulerapp.ui.utils.ViewModelFactory
