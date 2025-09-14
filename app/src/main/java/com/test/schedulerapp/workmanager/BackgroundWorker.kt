@@ -33,6 +33,9 @@ class BackgroundWorker(appContext: Context, workerParams: WorkerParameters) :
             return Result.success()
         } catch (e: Exception) {
             Log.i(TAG, "error - $e")
+            /*For some times may conflict with multiple apps launch schedule in that case
+            * we can use notification to know the launching error.
+            * Or we can retry it after a certain time.*/
             showNotificationForLaunchingIntent(pkg)
             return Result.failure()
         }
