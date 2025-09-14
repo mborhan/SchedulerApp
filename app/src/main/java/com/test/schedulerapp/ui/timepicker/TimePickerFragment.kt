@@ -86,6 +86,14 @@ class TimePickerFragment : Fragment() {
         binding.cancelButton.setOnClickListener {
             handleCancelSchedule()
         }
+
+        binding.updateButton.setOnClickListener {
+            Navigator.startSecondLVL(
+                requireActivity() as AppCompatActivity,
+                UpdateScheduleFragment(),
+                true
+            )
+        }
     }
 
     private fun initViewModel() {
