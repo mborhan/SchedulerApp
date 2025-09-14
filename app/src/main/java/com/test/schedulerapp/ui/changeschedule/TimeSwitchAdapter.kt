@@ -20,7 +20,7 @@ class TimeSwitchAdapter(
     }
 
     inner class TimeSwitchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvTime: TextView = itemView.findViewById(R.id.tvTime)
+        val timeText: TextView = itemView.findViewById(R.id.timeText)
         val switchButton: Switch = itemView.findViewById(R.id.switchButton)
     }
 
@@ -32,7 +32,7 @@ class TimeSwitchAdapter(
 
     override fun onBindViewHolder(holder: TimeSwitchViewHolder, position: Int) {
         val item = items[position]
-        holder.tvTime.text = item.time
+        holder.timeText.text = "hour: " + item.time
         holder.switchButton.isChecked = item.isEnabled
 
         // Handle switch toggle
